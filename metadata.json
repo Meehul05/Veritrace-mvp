@@ -1,0 +1,8 @@
+{
+  "name": "VeriTrace - Digital Forensic & Deepfake Authentication Pipeline",
+  "description": "Evidence-grade digital forensic and deepfake authentication system adhering to Section 63 BSA legal standards with genuine ML artifact detection, perceptual hashing, and cryptographic provenance verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
