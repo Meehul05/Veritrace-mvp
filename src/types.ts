@@ -87,6 +87,12 @@ export interface FrameAnalysis {
   sensor_analysis?: string;
   lighting_analysis?: string;
   anatomy_analysis?: string;
+  runtime?: string;
+  device?: string;
+  inference_time_ms?: number;
+  gend_detector_score?: number;
+  raw_probabilities?: number[];
+  interpretation?: string;
 }
 
 export interface PerceptualHashMatch {

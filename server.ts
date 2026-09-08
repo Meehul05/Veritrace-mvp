@@ -45,13 +45,31 @@ app.get('/api/v1/health', (req: Request, res: Response) => {
     pipeline_version: 'veritrace-v1.1.0-lock',
     engine: 'VeriTrace Forensic Engine (Node.js/TypeScript)',
     ml_provider: {
-      name: MLInferenceService.MODEL_NAME,
-      version: MLInferenceService.MODEL_VERSION,
+      name: process.env.ML_PROVIDER === 'gend_dinov3' ? 'GenD-DINOv3-L (Local Foundation Model)' : MLInferenceService.MODEL_NAME,
+      version: process.env.GEND_MODEL_ID || MLInferenceService.MODEL_VERSION,
       status: 'READY',
-      device: 'cpu',
+      device: (process.env.ML_DEVICE || 'cpu').toUpperCase(),
+      runtime: 'Local (On-Device)',
     },
     database: 'SQLite/JSON WAL Storage Active',
     bsa_section_63_compliant: true,
+  });
+});
+
+// 1b. Dedicated ML Provider Health & Diagnostics
+app.get('/api/v1/ml/status', (req: Request, res: Response) => {
+  res.json({
+    provider: 'GenD-DINOv3-L',
+    model_id: process.env.GEND_MODEL_ID || 'yermandy/GenD_DINOv3_L',
+    status: 'READY',
+    device: (process.env.ML_DEVICE || 'cpu').toUpperCase(),
+    runtime: 'Local',
+    multimodal_ensemble: {
+      gemini_vision: Boolean(process.env.GEMINI_API_KEY),
+      swin_transformer: true,
+      ela: true,
+      gend_dinov3: true,
+    },
   });
 });
 

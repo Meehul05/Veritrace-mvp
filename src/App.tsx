@@ -36,6 +36,13 @@ import { BsaReportModal } from './components/BsaReportModal';
 
 export default function App() {
   const [investigation, setInvestigation] = useState<Investigation | undefined>(undefined);
+  const [mlProvider, setMlProvider] = useState<{
+    name: string;
+    version: string;
+    status: string;
+    device: string;
+    runtime?: string;
+  } | undefined>(undefined);
   const [evidenceList, setEvidenceList] = useState<Evidence[]>([]);
   const [activeEvidenceId, setActiveEvidenceId] = useState<string | undefined>(undefined);
   const [analysisData, setAnalysisData] = useState<AnalysisDetailsResponse | null>(null);
@@ -50,7 +57,20 @@ export default function App() {
   useEffect(() => {
     fetchInvestigations();
     fetchEvidenceList();
+    fetchHealthStatus();
   }, []);
+
+  const fetchHealthStatus = async () => {
+    try {
+      const res = await fetch('/api/v1/health');
+      const data = await res.json();
+      if (data.ml_provider) {
+        setMlProvider(data.ml_provider);
+      }
+    } catch (err) {
+      console.error('Failed to load health status:', err);
+    }
+  };
 
   const fetchInvestigations = async () => {
     try {
@@ -128,7 +148,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-100/60 text-slate-900 font-sans flex flex-col">
-      <Header investigation={investigation} />
+      <Header investigation={investigation} mlProvider={mlProvider} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8 space-y-6">
         {/* Evidence Ingestion Zone */}

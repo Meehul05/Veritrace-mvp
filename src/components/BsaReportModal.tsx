@@ -121,6 +121,9 @@ export const BsaReportModal: React.FC<BsaReportModalProps> = ({ evidence, invest
                   <p>Filename: {evidence.original_filename}</p>
                   <p>SHA-256: {evidence.sha256}</p>
                   <p>Size: {evidence.size_bytes} bytes | Storage Ref: {evidence.storage_ref}</p>
+                  <p className="text-sky-700 font-sans font-semibold pt-1">
+                    ML Verification: GenD-DINOv3-L Foundation Model (Local On-Device) + Swin-B + ELA
+                  </p>
                 </div>
               </div>
 

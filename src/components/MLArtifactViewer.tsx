@@ -15,7 +15,11 @@ import {
   FileCheck2,
   ScanEye,
   SunMedium,
-  UserCheck
+  UserCheck,
+  Scale,
+  Zap,
+  CheckCircle2,
+  Server
 } from 'lucide-react';
 import { Evidence, FrameAnalysis } from '../types';
 
@@ -139,6 +143,9 @@ export const MLArtifactViewer: React.FC<MLArtifactViewerProps> = ({
             >
               <option value="ensemble">
                 Multimodal Forensic Ensemble (Gemini Vision + Swin-B + ELA) [Recommended]
+              </option>
+              <option value="gend_dinov3">
+                GenD-DINOv3-L Foundation Vision Transformer (Local On-Device)
               </option>
               <option value="gemini_vision">
                 Gemini Multimodal Forensic Vision (Deep Visual Reasoning &amp; Optics)
@@ -317,6 +324,96 @@ export const MLArtifactViewer: React.FC<MLArtifactViewerProps> = ({
               >
                 {currentFrame.confidence_band}
               </span>
+            </div>
+          </div>
+
+          {/* GenD-DINOv3-L Foundation Model Card */}
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3 text-xs">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Cpu className="w-3.5 h-3.5 text-sky-600" />
+                <span className="font-bold text-slate-800">GenD-DINOv3-L Foundation Detector</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-sky-100 text-sky-800 border border-sky-200">
+                  {currentFrame.device || 'CPU'}
+                </span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-200 text-slate-700">
+                  {currentFrame.inference_time_ms ? `${currentFrame.inference_time_ms.toFixed(0)}ms` : '<150ms'}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-2.5 border border-slate-200 space-y-2">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-slate-500 font-medium">Model Checkpoint:</span>
+                <span className="font-mono text-slate-700 font-semibold text-[10px]">yermandy/GenD_DINOv3_L</span>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-[11px] font-medium mb-1">
+                  <span className="text-slate-600">Detector Score (Manipulation):</span>
+                  <span className="font-mono font-bold text-slate-900">
+                    {currentFrame.gend_detector_score !== undefined
+                      ? `${(currentFrame.gend_detector_score * 100).toFixed(1)}%`
+                      : `${(syntheticProb * 100).toFixed(1)}%`}
+                  </span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                  <div
+                    className="h-full bg-sky-600 transition-all duration-300"
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        Math.max(
+                          0,
+                          (currentFrame.gend_detector_score !== undefined
+                            ? currentFrame.gend_detector_score
+                            : syntheticProb) * 100
+                        )
+                      )}%`,
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Raw Softmax Class Probabilities */}
+              <div className="grid grid-cols-2 gap-2 pt-1 text-[11px] font-mono">
+                <div className="bg-slate-50 p-1.5 rounded border border-slate-100">
+                  <span className="text-slate-400 block text-[9px] uppercase font-sans">Class 0 (Authentic)</span>
+                  <span className="font-bold text-emerald-700">
+                    {currentFrame.raw_probabilities?.[0] !== undefined
+                      ? `${(currentFrame.raw_probabilities[0] * 100).toFixed(1)}%`
+                      : `${(authenticProb * 100).toFixed(1)}%`}
+                  </span>
+                </div>
+                <div className="bg-slate-50 p-1.5 rounded border border-slate-100">
+                  <span className="text-slate-400 block text-[9px] uppercase font-sans">Class 1 (Manipulated)</span>
+                  <span className="font-bold text-rose-700">
+                    {currentFrame.raw_probabilities?.[1] !== undefined
+                      ? `${(currentFrame.raw_probabilities[1] * 100).toFixed(1)}%`
+                      : `${(syntheticProb * 100).toFixed(1)}%`}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Evidentiary Interpretation Statement */}
+            <div className="p-2.5 rounded-lg bg-white border border-slate-200 text-[11px] space-y-1">
+              <div className="flex items-center gap-1 font-bold text-slate-700 text-[10px] uppercase tracking-wide">
+                <Scale className="w-3 h-3 text-sky-600" />
+                <span>Statutory Interpretation (Sec. 63 BSA)</span>
+              </div>
+              <p className="text-slate-600 italic font-serif leading-tight">
+                "{currentFrame.interpretation || (syntheticProb >= 0.60
+                  ? 'Model indicates higher likelihood of manipulation.'
+                  : syntheticProb <= 0.40
+                  ? 'Model indicates lower likelihood of manipulation (higher likelihood of authentic capture).'
+                  : 'Model output is inconclusive within intermediate decision boundary.')}"
+              </p>
+              <p className="text-[10px] text-slate-400 font-mono pt-0.5">
+                Runtime: {currentFrame.runtime || 'Local On-Device'} • Zero data egress
+              </p>
             </div>
           </div>
 

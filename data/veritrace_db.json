@@ -614,6 +614,15 @@
       "created_by_module": "ExplainabilityService",
       "created_at": "2026-09-08T06:27:16.553Z",
       "parent_sha256": "98df3bf2c8c0a5a997ea527fdf229ba130b4cd0c2a5c3c5e34459f1adb0b519f"
+    },
+    "heatmap_1788860460676_4wxms": {
+      "id": "heatmap_1788860460676_4wxms",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "artifact_type": "heatmap",
+      "storage_ref": "/app/applet/data/storage/artifacts/heatmap_1788860460676_4wxms.jpg",
+      "created_by_module": "ExplainabilityService",
+      "created_at": "2026-09-08T09:41:00.676Z",
+      "parent_sha256": "7de7ed51a1594fff247f4cae2301eceacf5313d6011e37b4a4c8733f7bb72c07"
     }
   },
   "analysis_jobs": {
@@ -2614,43 +2623,6 @@
       "lighting_analysis": "There is no lighting information. The central circular element exhibits a perfectly uniform gradient-like appearance without any interaction with ambient light, shadows, or reflections typical of real-world lens elements or apertures.",
       "anatomy_analysis": "No organic textures, skin, or anatomical features are present to evaluate."
     },
-    "frame_1788846574888_mtkwb": {
-      "id": "frame_1788846574888_mtkwb",
-      "evidence_id": "ev_1788846574859_3fi74",
-      "frame_index": 0,
-      "timestamp_ms": 0,
-      "ml_score": 0.099,
-      "ml_label": "AUTHENTIC",
-      "confidence_band": "LIKELY_AUTHENTIC",
-      "pipeline_version": "veritrace-v1.2.0-multimodal",
-      "model_name": "Multimodal-Forensic-Ensemble (Gemini-Vision + Swin-B + ELA)",
-      "model_version": "Hybrid-SOTA-2026.2",
-      "quality_flag": "OK",
-      "heatmap_artifact_id": "heatmap_1788846577734_ugmch",
-      "swin_ai_prob": 0,
-      "swin_real_prob": 1,
-      "vit_logit_fake": -5.5667,
-      "vit_logit_real": 5.5883,
-      "ela_score": 1.3924,
-      "spectral_score": 49.0158,
-      "detected_source": "Authentic Camera Sensor / Real",
-      "source_breakdown": {
-        "stable_diffusion": 0.152,
-        "midjourney": 0.2367,
-        "dalle": 0.0875,
-        "real": 0.3129,
-        "other_ai": 0.2108
-      },
-      "engine_used": "ensemble",
-      "forensic_justification": "This image is the 'Lenna' test photograph, a standard reference image used in digital image processing since 1973. It was captured using a physical camera (analog film) and subsequently digitized. It predates modern AI generation architectures by decades, making it a foundational 'authentic' ground-truth image for digital imaging.",
-      "anomalies": [
-        "Scan-line aliasing",
-        "Analog film/print grain characteristics"
-      ],
-      "sensor_analysis": "The image exhibits classic analog photographic characteristics such as film grain, standard chromatic aberration, and the characteristic scan-line artifacts of an analog-to-digital conversion from a print medium. There is no evidence of diffusion-based smoothing or latent noise typical of modern GANs or diffusion models.",
-      "lighting_analysis": "The lighting is consistent with a studio setup using soft fill and key lights. The catchlights in the eyes are physically plausible, matching the expected reflection of studio light sources, which is highly difficult for early generative models to replicate accurately.",
-      "anatomy_analysis": "The skin texture contains irregular pores and natural imperfections consistent with film photography. Hair strands are rendered with high fidelity and organic blending, devoid of the 'plastic' or 'smudged' textures common in synthetic generation."
-    },
     "frame_1788846575838_bcwqg": {
       "id": "frame_1788846575838_bcwqg",
       "evidence_id": "ev_1788846575813_0m47v",
@@ -2839,6 +2811,52 @@
       "sensor_analysis": "The image exhibits standard Bayer-filter sensor noise and natural chromatic aberration consistent with a real-world camera lens. The depth-of-field transition from the subject's torso to the background is optically accurate and consistent with a moderate aperture setting.",
       "lighting_analysis": "The lighting is consistent with a multi-point studio setup. Catchlights in the pupils are symmetric and match the light sources. Shadows beneath the chin and neck are physically plausible for the direction of light.",
       "anatomy_analysis": "Skin texture, including pores, fine lines, and natural stubble variation, is authentic. The tattoo alignment and anatomical geometry (ears, teeth, hands/arms) show no signs of morphing or generative artifacts."
+    },
+    "frame_1788860457254_pj0xb": {
+      "id": "frame_1788860457254_pj0xb",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "frame_index": 0,
+      "timestamp_ms": 0,
+      "ml_score": 0.0935,
+      "ml_label": "AUTHENTIC",
+      "confidence_band": "LIKELY_AUTHENTIC",
+      "pipeline_version": "veritrace-v1.2.0-multimodal",
+      "model_name": "GenD-DINOv3-L (yermandy/GenD_DINOv3_L)",
+      "model_version": "Hybrid-SOTA-2026.2",
+      "quality_flag": "OK",
+      "heatmap_artifact_id": "heatmap_1788860460676_4wxms",
+      "swin_ai_prob": 0.0987,
+      "swin_real_prob": 0.9013,
+      "vit_logit_fake": -0.5134,
+      "vit_logit_real": 0.5134,
+      "ela_score": 1.3924,
+      "spectral_score": 49.0158,
+      "detected_source": "Authentic Camera Sensor / Real",
+      "source_breakdown": {
+        "stable_diffusion": 0.05,
+        "midjourney": 0.05,
+        "dalle": 0.05,
+        "real": 0.8,
+        "other_ai": 0.05
+      },
+      "engine_used": "gend_dinov3",
+      "forensic_justification": "This is a verified historical photograph known as the 'Lenna' image. Its provenance predates modern artificial intelligence generation by several decades. It serves as the standard benchmark for image processing algorithms. The image lacks all tell-tale markers of generative AI (e.g., mismatched symmetry, hallucinated textures, or latent denoising patterns).",
+      "anomalies": [
+        "Analog film grain/scanning noise pattern",
+        "Classic source image artifacts"
+      ],
+      "sensor_analysis": "This image is the iconic 'Lenna' test image, originally captured on analog film and digitized in 1973. It exhibits characteristic film grain and analog scanning artifacts rather than the latent diffusion smoothing or geometric warping typical of GANs or diffusion models.",
+      "lighting_analysis": "Lighting is consistent with controlled studio photography of the 1970s. Catchlights in the eyes are anatomically correct and consistent with a singular soft light source. Shadows are natural and follow physically accurate projection.",
+      "anatomy_analysis": "The image displays authentic skin texture, including natural imperfections and pore structures consistent with high-resolution film scans. No evidence of AI-driven texture blending, plasticization, or morphing artifacts is present.",
+      "runtime": "Local (On-Device Inference)",
+      "device": "AUTO",
+      "inference_time_ms": 3426,
+      "gend_detector_score": 0.0935,
+      "raw_probabilities": [
+        0.9065,
+        0.0935
+      ],
+      "interpretation": "Model indicates lower likelihood of manipulation (higher likelihood of authentic capture)."
     }
   },
   "perceptual_hash_matches": {
@@ -6303,6 +6321,71 @@
         }
       },
       "created_at": "2026-09-08T06:27:16.564Z"
+    },
+    "assess_1788860460699_3xl6h": {
+      "id": "assess_1788860460699_3xl6h",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "pipeline_version": "veritrace-v1.1.0-lock",
+      "overall_status": "COMPLETE",
+      "overall_confidence": 0.0935,
+      "verdict": "LIKELY_AUTHENTIC",
+      "assessment_data": {
+        "assessment_id": "assess_1788860460699_3xl6h",
+        "evidence_id": "ev_1788846574859_3fi74",
+        "pipeline_version": "veritrace-v1.1.0-lock",
+        "overall_status": "COMPLETE",
+        "verdict": "LIKELY_AUTHENTIC",
+        "overall_confidence": 0.0935,
+        "evidence_summary": {
+          "filename": "real_nikon_photo.jpg",
+          "sha256": "7de7ed51a1594fff247f4cae2301eceacf5313d6011e37b4a4c8733f7bb72c07",
+          "size_bytes": 91814,
+          "mime_type": "image/jpeg",
+          "media_type": "image",
+          "ingested_at": "2026-09-08T05:49:34.859Z"
+        },
+        "c2pa_status": "NOT_FOUND",
+        "gps_present": false,
+        "frames_evaluated": 1,
+        "frames_detail": [
+          {
+            "index": 0,
+            "score": 0.0935,
+            "band": "LIKELY_AUTHENTIC",
+            "quality": "OK"
+          }
+        ],
+        "phash_matches_count": 0,
+        "searches_count": 14,
+        "earliest_source": "2023-05-31",
+        "earliest_source_name": "Wikimedia Commons (Public Media Database)",
+        "earliest_context": "Public domain media asset: Real 15.8100, 120.3590 I, the copyright holder of this work, hereby publish it under the following license: English Poblacion Central Real Urbiztondo,",
+        "earliest_url": "https://commons.wikimedia.org/wiki/File%3A5563Poblacion_Central_Real_Urbiztondo%2C_Pangasinan_08.jpg",
+        "identified_subject": "Unidentified digital media file",
+        "web_spread_summary": "No open-source web indexing correlation available.",
+        "osint_compliance": "STRICT_OPEN_SOURCE_ONLY: Private social media handles and personal accounts excluded.",
+        "module_breakdown": {
+          "MetadataExtraction": {
+            "status": "OK"
+          },
+          "C2PAInspection": {
+            "status": "OK"
+          },
+          "PerceptualHashing": {
+            "status": "OK"
+          },
+          "MLInference": {
+            "status": "OK"
+          },
+          "ProvenanceGraph": {
+            "status": "OK"
+          },
+          "ForensicAggregation": {
+            "status": "OK"
+          }
+        }
+      },
+      "created_at": "2026-09-08T09:41:00.699Z"
     }
   },
   "audit_events": {
@@ -9870,6 +9953,53 @@
         "forensic_justification": "This image is a well-documented photograph of Alakh Pandey. The forensic analysis reveals no hallmarks of deepfake insertion or generative reconstruction. The micro-textures and noise profiles are consistent with digital camera acquisition rather than latent diffusion output."
       },
       "timestamp": "2026-09-08T06:27:16.571Z"
+    },
+    "audit_1788860460685_67450ce6": {
+      "id": "audit_1788860460685_67450ce6",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "actor": "System",
+      "module_name": "MLInferenceService",
+      "event_type": "FRAME_ANALYZED",
+      "event_detail": {
+        "frame_index": 0,
+        "ml_score": 0.0935,
+        "confidence_band": "LIKELY_AUTHENTIC",
+        "quality_flag": "OK",
+        "engine_used": "gend_dinov3",
+        "detected_source": "Authentic Camera Sensor / Real",
+        "has_gemini_forensics": true
+      },
+      "timestamp": "2026-09-08T09:41:00.685Z"
+    },
+    "audit_1788860460703_62af3e16": {
+      "id": "audit_1788860460703_62af3e16",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "actor": "System",
+      "module_name": "AggregationService",
+      "event_type": "ASSESSMENT_AGGREGATED",
+      "event_detail": {
+        "assessment_id": "assess_1788860460699_3xl6h",
+        "verdict": "LIKELY_AUTHENTIC",
+        "overall_status": "COMPLETE",
+        "confidence": 0.0935
+      },
+      "timestamp": "2026-09-08T09:41:00.703Z"
+    },
+    "audit_1788860460707_5b3f561e": {
+      "id": "audit_1788860460707_5b3f561e",
+      "evidence_id": "ev_1788846574859_3fi74",
+      "actor": "Investigating Officer",
+      "module_name": "API",
+      "event_type": "EVIDENCE_REANALYZED",
+      "event_detail": {
+        "evidence_id": "ev_1788846574859_3fi74",
+        "engine": "gend_dinov3",
+        "threshold": 0.5,
+        "new_score": 0.0935,
+        "new_verdict": "LIKELY_AUTHENTIC",
+        "forensic_justification": "This is a verified historical photograph known as the 'Lenna' image. Its provenance predates modern artificial intelligence generation by several decades. It serves as the standard benchmark for image processing algorithms. The image lacks all tell-tale markers of generative AI (e.g., mismatched symmetry, hallucinated textures, or latent denoising patterns)."
+      },
+      "timestamp": "2026-09-08T09:41:00.707Z"
     }
   },
   "forensic_reports": {

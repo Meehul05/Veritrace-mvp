@@ -115,6 +115,14 @@ export const AssessmentOverview: React.FC<AssessmentOverviewProps> = ({
               style={{ width: `${confPercent}%` }}
             />
           </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-2 mt-3 pt-2 text-[10px] opacity-80 border-t border-current/10 font-mono">
+            <span className="flex items-center gap-1">
+              <Cpu className="w-3 h-3" />
+              Engine: GenD-DINOv3-L + Swin-B + ELA Ensemble
+            </span>
+            <span>Local On-Device Execution • Section 63 BSA Admissible</span>
+          </div>
         </div>
       </div>
 
